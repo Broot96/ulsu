@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -83,14 +83,14 @@
 
 <!--<main id="main" class="main">-->
 <div>
-  <div class="card-header">
+  <div class="boardheader">
+  <h1 style="font-weight: bolder">자유게시판</h1>
 
-  <h1>소통해여~</h1>
-    <nav>
+    <!--<nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
       </ol>
-    </nav>
+    </nav>-->
   </div>
   <!-- End Page Title -->
 
@@ -100,77 +100,97 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">소통게시판</h5>
-            <div>
-              <form th:method="get" th:action="@{/orders}">
-                <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" required th:value="${startDate != null ? startDate : ''}">
-                <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" name="endDate" required th:value="${endDate != null ? endDate : ''}">
-                <button type="submit" class="btn">Filter</button>
-                <a th:href="@{/orders}" class="btn">초기화</a>
-              </form>
-            </div>
-            <!-- Table with stripped rows -->
-            <table class="table datatable">
-              <thead>
-              <tr>
-                <th scope="col">번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">작성일</th>
-                <th scope="col">조회수</th>
-                <th scope="col">댓글</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <div class="badge bg-primary"><th scope="row" >공지</th></div>
-                <th>하이</th>
-                <td>Brandon Jacob</td>
-                <td>2016-05-25</td>
-                <td>28</td>
-                <td>Designer</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <th>하이</th>
-                <td>Bridie Kessler</td>
-                <td>2014-12-05</td>
-                <td>35</td>
-                <td>Developer</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <th>하이</th>
-                <td>Ashleigh Langosh</td>
-                <td>2011-08-12</td>
-                <td>45</td>
-                <td>Finance</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <th>하이</th>
-                <td>Angus Grady</td>
-                <td>2012-06-11</td>
-                <td>34</td>
-                <td>HR</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <th>하이</th>
-                <td>Raheem Lehner</td>
-                <td>2011-04-19</td>
-                <td>47</td>
-                <td>Dynamic Division Officer</td>
-              </tr>
-              </tbody>
-            </table>
-            <!-- End Table with stripped rows -->
+            <!-- Default Tabs -->
+            <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
+              <li class="nav-item flex-fill" role="presentation">
+                <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true" style="height: 70px; font-size: 20px" >[[${headerList[0].brdHeaderTtl}]]</button>
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-justified" type="button" role="tab" aria-controls="profile" aria-selected="false" style="height: 70px; font-size: 20px">[[${headerList[1].brdHeaderTtl}]]</button>
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false" style="height: 70px; font-size: 20px">[[${headerList[2].brdHeaderTtl}]]</button>
+              </li>
+            </ul>
+            <div class="tab-content pt-2" id="myTabjustifiedContent">
+              <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card-body">
+                  <div>
+                    <form th:method="get" th:action="@{/orders}">
+                      <label for="startDate">등록일: </label>
+                      <input type="date" id="startDate" name="startDate" required th:value="${startDate != null ? startDate : ''}">
+                      <label for="endDate">~</label>
+                      <input type="date" id="endDate" name="endDate" required th:value="${endDate != null ? endDate : ''}">
+                      <button type="submit" class="btn">Filter</button>
+                      <a th:href="@{/orders}" class="btn">초기화</a>
+                    </form>
+                  </div>
+                  <!-- Table with stripped rows -->
+                  <table class="table datatable">
+                    <thead>
+                    <tr>
+                      <th scope="col">번호</th>
+                      <th scope="col">제목</th>
+                      <th scope="col">작성자</th>
+                      <th scope="col">작성일</th>
+                      <th scope="col">조회수</th>
+                      <th scope="col">댓글</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <div class="badge bg-primary"><th scope="row" >공지</th></div>
+                      <th>하이</th>
+                      <td>Brandon Jacob</td>
+                      <td>2016-05-25</td>
+                      <td>28</td>
+                      <td>Designer</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <th>하이</th>
+                      <td>Bridie Kessler</td>
+                      <td>2014-12-05</td>
+                      <td>35</td>
+                      <td>Developer</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <th>하이</th>
+                      <td>Ashleigh Langosh</td>
+                      <td>2011-08-12</td>
+                      <td>45</td>
+                      <td>Finance</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <th>하이</th>
+                      <td>Angus Grady</td>
+                      <td>2012-06-11</td>
+                      <td>34</td>
+                      <td>HR</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <th>하이</th>
+                      <td>Raheem Lehner</td>
+                      <td>2011-04-19</td>
+                      <td>47</td>
+                      <td>Dynamic Division Officer</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="" role="tabpanel" aria-labelledby="home-tab">
+              </div>
+              <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
+                Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+              </div>
+            </div><!-- End Default Tabs -->
 
           </div>
         </div>
-
       </div>
     </div>
   </section>

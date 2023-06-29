@@ -329,6 +329,16 @@ h6 {
   font-weight: 600;
 }
 
+.boardheader{
+  padding-top: 100px;
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+  padding-bottom: 30px;
+
+}
+
+
 /* Bordered Tabs */
 .nav-tabs-bordered {
   border-bottom: 2px solid #ebeef4;

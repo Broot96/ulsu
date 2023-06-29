@@ -18,7 +18,7 @@ abstract class AuditingFields {
 
     @CreatedDate
     @Column(name = "regdate", updatable = false)
-    private LocalDate regDate;
+    private LocalDateTime regDate;
 
     @LastModifiedDate
     @Column(name = "moddate")
