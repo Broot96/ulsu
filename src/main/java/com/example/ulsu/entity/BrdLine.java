@@ -23,7 +23,7 @@ public class BrdLine extends AuditingFields{
     private String brdTtl;                                  //게시글 제목
     @Column(name = "WRT_TEAM", nullable = false)
     private String wrtTeam;                                 //작성자 그룹
-    @Column(name = "WRT_NAME", nullable = false)
+    @Column(name = "WRT_NAME", nullable = true)
     private String wrtName;                                 //작성자 이름
     @Column(name = "CN", nullable = true)
     private String cn;                                      //게시물 내용
@@ -33,6 +33,8 @@ public class BrdLine extends AuditingFields{
     private String pwd;                                     //게시물 비밀번호
     @Column(name = "DEL_YN", nullable = true)
     private String delYn;                                   //게시물 삭제여부
+    @Column(name = "A_YN" , nullable = true)
+    private String aYn;                                     //게시물 공지여부
 
     @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

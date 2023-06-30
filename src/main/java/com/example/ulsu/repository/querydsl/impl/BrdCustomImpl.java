@@ -1,24 +1,29 @@
 package com.example.ulsu.repository.querydsl.impl;
 
-import com.example.ulsu.entity.BrdHeader;
+
 import com.example.ulsu.entity.BrdLine;
+
 import com.example.ulsu.entity.QBrdLine;
+import com.example.ulsu.makeroom.responseDto.BrdLineListResponse;
 import com.example.ulsu.repository.querydsl.BrdCustom;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BrdCustomImpl extends QuerydslRepositorySupport implements BrdCustom {
 
     public BrdCustomImpl(){super(BrdLine.class);}
     @Override
-    public Page<BrdHeader> searchAll(String[] types, String keyword, Pageable pageable) {
+    public Page<BrdLine> searchAll(String[] types, String keyword, Pageable pageable) {
 
-        QBrdLine brdLine = QBrdLine.brdLine; // Q도메인 객체
+
+        QBrdLine brdLine = QBrdLine.brdLine;  // Q도메인 객체
         JPQLQuery<BrdLine> query = from(brdLine);
 
         if((types != null && types.length >0) && keyword != null){
@@ -27,11 +32,28 @@ public class BrdCustomImpl extends QuerydslRepositorySupport implements BrdCusto
 
             for(String type : types){
 
+                switch (type){
+                    case "ttl":
+                    booleanBuilder.or(brdLine.brdTtl.contains(keyword));
+                        break;
+                    case "cn":
+                    booleanBuilder.or(brdLine.cn.contains(keyword));
+                        break;
+                    case "wrtTeam":
+                    booleanBuilder.or(brdLine.wrtTeam.contains(keyword));
+                        break;
+                }
             }
+            query.where(brdLine.brdLineSeq.gt(0L));
 
         }
+        this.getQuerydsl().applyPagination(pageable, query);
 
-        return null;
+        List<BrdLine> list = query.fetch();
+
+        long count = query.fetchCount();
+
+        return new PageImpl<>(list, pageable, count);
     }
 
     @Override

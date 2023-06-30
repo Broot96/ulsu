@@ -25,6 +25,15 @@ public class BrdLineSaveRequest {
     @Schema(description = "게시물 제목")
     private String ttl;
 
+    @Schema(description = "작성 팀")
+    private String wrtTeam;
+
+    @Schema(description = "게시글 비밀번호")
+    private String pwd;
+
+    @Schema(description = "게시글 공지여부")
+    private String aYn;
+
     @NotBlank(message = "게시물 내용이 입력되지 않았습니다.")
     @Schema(description = "게시물 내용")
     private String cn;
