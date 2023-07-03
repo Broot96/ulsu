@@ -29,6 +29,8 @@
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
+
+
     <!-- =======================================================
     * Template Name: NiceAdmin
     * Updated: Mar 09 2023 with Bootstrap v5.2.3
@@ -80,8 +82,8 @@
     </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
-<div>
-<!--<main id="main" class="main">-->
+<!--<div class="main" >-->
+<main id="main" class="main col-9">
 
     <div class="pagetitle">
         <h1>Form Elements</h1>
@@ -93,7 +95,6 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
-
     <section class="section">
         <div class="row">
             <div>
@@ -106,7 +107,7 @@
                         <form th:method="post" th:action="@{/board/register}" enctype="multipart/form-data">
 
                         <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">제목</label>
+                                <label class="col-sm-2 col-form-label">제목</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="ttl">
                                 </div>
@@ -114,26 +115,31 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">작성자</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example" name="wrtTeam">
-                                        <option selected>작성자를 선택해주세요</option>
+                                    <select id="wrtTeam" class="form-select" aria-label="Default select example" name="wrtTeam"  onchange ="selectTeam()">
+                                        <option value="">작성자를 선택해주세요</option>
                                         <option value="뎁스">뎁스</option>
                                         <option value="뎁쑤좋다얼쑤">뎁쑤좋다얼쑤</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-3" style="display: none">
+                            <div class="row mb-3" >
                                 <label class="col-sm-2 col-form-label">작성자명</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select id="wrtName1" class="form-select" aria-label="Default select example" style="display: none">
+                                        <option selected>작성자 명을 선택해주세요</option>
+                                        <option value="권동협">권동협</option>
+                                        <option value="권석근">권석근</option>
+                                        <option value="박희람">박희람</option>
+                                        <option value="한동진">한동진</option>
+                                    </select>
+                                    <select id="wrtName2" class="form-select" aria-label="Default select example" style="display: none">
+                                        <option selected>작성자 명을 선택해주세요</option>
+                                        <option value="김성윤">김성윤</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">게시글 비밀번호</label>
+                                <label class="col-sm-2 col-form-label">게시글 비밀번호</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" placeholder="수정/삭제시 필요한 비밀번호를 입력하세요" name="pwd">
                                 </div>
@@ -151,13 +157,13 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">내용</label>
+                                <label class="col-sm-2 col-form-label">내용</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" style="height: 200px" name="cn"></textarea>
+                                    <textarea class="form-control" style="height: 300px" name="cn"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">파일 첨부</label>
+                                <label class="col-sm-2 col-form-label">파일 첨부</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="file" id="formFile" name="formFile" multiple>
                                 </div>
@@ -214,8 +220,8 @@
         </div>
     </section>
 
-<!--</main>&lt;!&ndash; End #main &ndash;&gt;-->
-</div>
+</main><!-- End #main -->
+<!--</div>-->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -234,6 +240,7 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
+<script src="/assets/js/register.js"></script>
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/vendor/chart.js/chart.umd.js"></script>

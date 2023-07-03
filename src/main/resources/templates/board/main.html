@@ -109,16 +109,28 @@
                 <div class="card-body">
                   <div>
                     <form th:method="get" th:action="@{/orders}">
-                      <label for="startDate">등록일: </label>
-                      <input type="date"  id="startDate" name="startDate" required th:value="${startDate != null ? startDate : ''}">
+                      <label for="startDate">등록일  :   </label>
+                      <input type="date" class="form-control-sm" style="width: 250px; margin-left: 10px" id="startDate" name="startDate" required th:value="${startDate != null ? startDate : ''}">
                       <label for="endDate">~</label>
-                      <input type="date"  id="endDate" name="endDate" required th:value="${endDate != null ? endDate : ''}">
-                      <button type="submit" class="btn">조회</button>
-                      <a th:href="@{/orders}" class="btn">초기화</a>
+                      <input type="date" class="form-control-sm" style="width: 250px" id="endDate" name="endDate" required th:value="${endDate != null ? endDate : ''}">
+                      <button type="submit" class="btn btn-outline-secondary">조회</button>
+                      <a th:href="@{/orders}" class="btn btn-outline-secondary">초기화</a>
+                    </form>
+                  </div>
+                  <div>
+                    <form>
+                      <div style="display: inline-flex; align-items: center; margin-top: 10px">
+                        <label>검색창 : </label>
+                        <div style="display: inline-flex; margin-left: 10px; border-radius: 7px; background-color: #e2e3e5; ">
+                          <input type="text" style="border-color: transparent; width: auto; background-color: #e2e3e5; border-radius: 7px; " >
+                          <button type="button" class="btn-close" style="font-size: larger"></button>
+                          <button type="button" class="btn btn-secondary btn-sm">검색</button>
+                        </div>
+                      </div>
                     </form>
                   </div>
                   <!-- Table with stripped rows -->
-                  <table class="table datatable">
+                  <table class="table" style="margin-top: 20px">
                     <thead>
                     <tr>
                       <th scope="col">번호</th>
