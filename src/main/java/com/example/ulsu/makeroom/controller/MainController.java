@@ -67,4 +67,12 @@ public class MainController {
     public void read(Model model){
 
     }
+    @GetMapping("/lte3")
+    public void lte(Model model){
+        log.info("+++++++lte 들어옴+++++++++");
+        List<BrdHeaderInfoResponse> brdHeaderList = brdService.getHeaderList();
+
+
+        model.addAttribute("headerList", brdHeaderList);
+    }
 }
