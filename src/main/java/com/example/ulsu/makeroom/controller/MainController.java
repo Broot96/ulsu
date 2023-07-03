@@ -63,4 +63,8 @@ public class MainController {
         return "redirect:/board/main";
 
     }
+    @GetMapping("/read")
+    public void read(Model model){
+
+    }
 }

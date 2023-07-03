@@ -37,7 +37,7 @@ public class BoardRepositoryTests {
 
         BrdLine brdLine = new BrdLine();
         brdLine.changeBrdHeaderSeq(2L);
-        brdLine.changeBrdTtl("부트공부중입니다.");
+        brdLine.changeBrdTtl("공부중입니다....3");
         brdLine.changeWrtTeam("얼수팀");
         brdLine.changeWrtName("권석근");
         brdLine.changeCn("spring boot와 jpa react공부를 해봅시다");
@@ -107,4 +107,29 @@ public class BoardRepositoryTests {
 
         todoList.forEach(brdLine -> log.info(brdLine.getCn()));
     }
+
+    @Test
+    public void testPagingList(){
+        String[] types = {"ttl","cn","wrtTeam"};
+
+        String keyword = "1";
+
+        Pageable pageable = PageRequest.of(0,10,Sort.by("brdLineSeq").descending());
+
+        Page<BrdLine> result = brdLineRepository.searchAll(types, keyword, pageable);
+
+        log.info(result.getTotalPages());
+
+        //pag size
+        log.info(result.getSize());
+
+        //pageNumber
+        log.info(result.getNumber());
+
+        //prev next
+        log.info(result.hasPrevious() + ": " + result.hasNext());
+
+        result.getContent().forEach(brdLine -> log.info(brdLine));
+    }
+
 }

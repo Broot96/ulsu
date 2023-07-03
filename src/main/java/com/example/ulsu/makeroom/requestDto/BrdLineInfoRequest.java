@@ -7,18 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+
 
 @Builder
 @Getter
 @AllArgsConstructor
 public class BrdLineInfoRequest {
 
-    @NotNull(message = "게시물 시퀀스가 입력되지 않았습니다")
+    //@NotNull(message = "게시물 시퀀스가 입력되지 않았습니다")
     @Schema(description = "게시물 seq 번호")
     private Long brdLineSeq;
 
-    @NotNull(message = "게시판 시퀀스가 입력되지 않았습니다.")
+    //@NotNull(message = "게시판 시퀀스가 입력되지 않았습니다.")
     @Schema(description = "게시판 seq")
     private Long brdHeaderSeq;
 

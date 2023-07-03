@@ -1,7 +1,9 @@
 package com.example.ulsu.service;
 
+import com.example.ulsu.entity.BrdLine;
 import com.example.ulsu.makeroom.requestDto.BrdFileSaveRequest;
 import com.example.ulsu.makeroom.requestDto.BrdLineSaveRequest;
+import com.example.ulsu.makeroom.requestDto.BrdPageRequest;
 import com.example.ulsu.makeroom.responseDto.BrdHeaderInfoResponse;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,4 +15,6 @@ public interface BrdService {
     List<BrdHeaderInfoResponse> getHeaderList();
     void FileSave(@Validated BrdFileSaveRequest brdFileSaveRequest);
     Long LineSave(BrdLineSaveRequest brdLineSaveRequest);
+
+    List<BrdLine> selectLineAll(BrdPageRequest brdPageRequest);
 }

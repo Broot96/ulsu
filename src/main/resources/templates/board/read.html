@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Mar 09 2023 with Bootstrap v5.2.3
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="main" class="logo d-flex align-items-center">
+            <img src="/assets/img/뎁스아이콘.png" alt="">
+            <span class="d-none d-lg-block">뎁수좋다얼쑤</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">권석근</span>
+                </a><!-- End Profile Iamge Icon -->
+
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+<div>
+    <!--<main id="main" class="main">-->
+
+    <div class="pagetitle">
+        <h1>Form Elements</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Elements</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">General Form Elements</h5>
+
+                        <!-- General Form Elements -->
+                        <form th:method="post" th:action="@{/board/register}" enctype="multipart/form-data">
+
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">제목</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ttl">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">작성자</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example" name="wrtTeam">
+                                        <option selected>작성자를 선택해주세요</option>
+                                        <option value="뎁스">뎁스</option>
+                                        <option value="뎁쑤좋다얼쑤">뎁쑤좋다얼쑤</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3" style="display: none">
+                                <label class="col-sm-2 col-form-label">작성자명</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">게시글 비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" placeholder="수정/삭제시 필요한 비밀번호를 입력하세요" name="pwd">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0">공지 여부</legend>
+                                <div class="col-sm-10">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1" name="aYn">
+                                        <label class="form-check-label" for="gridCheck1">
+                                            공지 등록
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">내용</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" style="height: 200px" name="cn"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputNumber" class="col-sm-2 col-form-label">파일 첨부</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="formFile" name="formFile" multiple>
+                                </div>
+                            </div>
+                            <!--<fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            First radio
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Second radio
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="option" disabled>
+                                        <label class="form-check-label" for="gridRadios3">
+                                            Third disabled radio
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>-->
+
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Select</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label"></label>
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary" style="text-align: right">등록</button>
+                                </div>
+                            </div>
+
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container-xl">
+        <div class="position-relative mb-3">
+            <div class="row g-3 justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">댓글</h1>
+                </div>
+                <div class="col-auto">
+                    <div class="page-utilities">
+                        <select class="form-select form-select-sm w-auto" >
+                            <option selected value="option-1">All</option>
+                            <option value="option-2">News</option>
+                            <option value="option-3">Product</option>
+                            <option value="option-4">Project</option>
+                            <option value="option-4">Billing</option>
+                        </select>
+                    </div><!--//page-utilities-->
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="text-center mt-4">
+                <div class="comment_div">
+                    <input type="text" id="comment_msg" class="comments" row="3" name="comment_msg" />
+                    <label ><input type="checkbox" id="comment_secret_yn" name="comment_secret_yn" onchange="YNCheck(this);" value="N"> 비밀 댓글</label>
+                    <input type="hidden"  name="board_no" value="${board.board_no}">
+                    <input type="hidden"  name="user_no" value="${sessionScope.user_no}">
+                    <input type="button" class="btn app-btn-primary"  value="댓글 등록" onclick="write_comment();">
+
+                </div><!--//container-fluid-->
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <!--</main>&lt;!&ndash; End #main &ndash;&gt;-->
+</div>
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.min.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

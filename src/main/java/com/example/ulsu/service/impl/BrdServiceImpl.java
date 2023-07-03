@@ -5,6 +5,7 @@ import com.example.ulsu.entity.BrdHeader;
 import com.example.ulsu.entity.BrdLine;
 import com.example.ulsu.makeroom.requestDto.BrdFileSaveRequest;
 import com.example.ulsu.makeroom.requestDto.BrdLineSaveRequest;
+import com.example.ulsu.makeroom.requestDto.BrdPageRequest;
 import com.example.ulsu.makeroom.responseDto.BrdHeaderInfoResponse;
 import com.example.ulsu.repository.BrdFileRepository;
 import com.example.ulsu.repository.BrdHeaderRepository;
@@ -13,6 +14,7 @@ import com.example.ulsu.service.BrdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -97,7 +99,9 @@ public class BrdServiceImpl implements BrdService {
         BrdLine brdLine = new BrdLine();
         brdLine.changeBrdHeaderSeq(1L);
         brdLine.changeBrdTtl(brdLineSaveRequest.getTtl());
+        brdLine.changeWrtName(brdLineSaveRequest.getWrtName());
         brdLine.changePwd(brdLineSaveRequest.getPwd());
+        brdLine.changeAyn("on".equals(brdLineSaveRequest.getAYn()) ? "Y" : "N");
         brdLine.changeCn(brdLineSaveRequest.getCn());
         brdLine.changeWrtTeam(brdLineSaveRequest.getWrtTeam());
 
@@ -105,5 +109,14 @@ public class BrdServiceImpl implements BrdService {
         Long brdLineSeq = brdLine.getBrdLineSeq();
 
         return brdLineSeq;
+    }
+
+    @Override
+    public List<BrdLine> selectLineAll(BrdPageRequest brdPageRequest) {
+
+        List<BrdLine> brdLineList = brdLineRepository.findAll(Sort.by(String.valueOf(brdPageRequest.getBrdHeaderSeq())).descending());
+
+
+        return null;
     }
 }

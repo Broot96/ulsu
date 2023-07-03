@@ -40,6 +40,8 @@ public class BrdLine extends AuditingFields{
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "BRD_HEADER_SEQ", referencedColumnName = "BRD_HEADER_SEQ", insertable = false, updatable = false)
     private BrdHeader brdHeader;
+
+
     public void changeBrdHeaderSeq(Long brdHeaderSeq){this.brdHeaderSeq = brdHeaderSeq;}
     public void changeBrdTtl(String brdTtl){this.brdTtl = brdTtl;}
     public void changeWrtTeam(String wrtTeam){this.wrtTeam = wrtTeam;}
@@ -48,6 +50,7 @@ public class BrdLine extends AuditingFields{
     public void changeIntqCnt(int intqCnt){this.intqCnt = intqCnt;}
     public void changePwd(String pwd){this.pwd = pwd;}
     public void changeDelYn(String delYn){this.delYn = delYn;}
+    public void changeAyn(String aYn){this.aYn = aYn;}
 
 
 
