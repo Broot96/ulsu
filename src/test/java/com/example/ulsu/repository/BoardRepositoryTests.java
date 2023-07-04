@@ -110,9 +110,9 @@ public class BoardRepositoryTests {
 
     @Test
     public void testPagingList(){
-        String[] types = {"ttl","cn","wrtTeam"};
+        String[] types = {"t","c","w"};
 
-        String keyword = "1";
+        String keyword = "이거없어임마";
 
         Pageable pageable = PageRequest.of(0,10,Sort.by("brdLineSeq").descending());
 

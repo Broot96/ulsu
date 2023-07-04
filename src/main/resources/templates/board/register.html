@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -46,7 +46,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="main" class="logo d-flex align-items-center">
+        <a th:href="@{/board/main}" class="logo d-flex align-items-center">
             <img src="/assets/img/뎁스아이콘.png" alt="">
             <span class="d-none d-lg-block">뎁수좋다얼쑤</span>
         </a>
@@ -89,9 +89,9 @@
         <h1>Form Elements</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Forms</li>
-                <li class="breadcrumb-item active">Elements</li>
+                <li class="breadcrumb-item"><a th:href="@{/board/main}">Home</a></li>
+                <li class="breadcrumb-item">게시물 작성</li>
+
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -101,7 +101,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">General Form Elements</h5>
+                        <h5 class="card-title">게시물 작성</h5>
 
                         <!-- General Form Elements -->
                         <form th:method="post" th:action="@{/board/register}" enctype="multipart/form-data">
@@ -109,7 +109,7 @@
                         <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">제목</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="ttl">
+                                    <input type="text" class="form-control" name="brdTtl">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -125,7 +125,7 @@
                             <div class="row mb-3" >
                                 <label class="col-sm-2 col-form-label">작성자명</label>
                                 <div class="col-sm-10">
-                                    <select id="wrtName1" class="form-select" aria-label="Default select example" style="display: none">
+                                    <select id="wrtName1" name="wrtName" class="form-select" aria-label="Default select example" style="display: none">
                                         <option selected>작성자 명을 선택해주세요</option>
                                         <option value="권동협">권동협</option>
                                         <option value="권석근">권석근</option>

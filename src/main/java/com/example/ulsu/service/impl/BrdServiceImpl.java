@@ -15,7 +15,6 @@ import com.example.ulsu.repository.BrdLineRepository;
 import com.example.ulsu.service.BrdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +34,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Log4j2
+@Transactional
 public class BrdServiceImpl implements BrdService {
 
     private final BrdHeaderRepository brdHeaderRepository;
@@ -172,9 +172,10 @@ public class BrdServiceImpl implements BrdService {
         Pageable pageable = brdPageRequest.getPageable("brdLineSeq");
 
         Page<BrdLine> result = brdLineRepository.searchAll(types, keyword, pageable);
-
+        log.info("+++++searchAll작동++++++++");
         List<BrdLineInfoResponse> pageResponseList = result.getContent().stream()
                 .map(brdLine -> brdLineInfoMapper.apply(brdLine)).collect(Collectors.toList());
+        log.info(pageResponseList);
 
         return BrdPageResponse.<BrdLineInfoResponse>withAll()
                 .brdPageRequest(brdPageRequest)

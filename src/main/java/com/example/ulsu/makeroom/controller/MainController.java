@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -32,13 +29,15 @@ public class MainController {
     private final BrdService brdService;
 
     @GetMapping("/main")
-    public void main(Model model, BrdPageRequest brdPageRequest){
+    public void main(Model model,@RequestParam(defaultValue = "1") int page, BrdPageRequest brdPageRequest){
+        brdPageRequest.changePage(page);
 
         List<BrdHeaderInfoResponse> brdHeaderList = brdService.getHeaderList();
         BrdPageResponse<BrdLineInfoResponse> pageResponse = brdService.list(brdPageRequest);
 
         model.addAttribute("headerList", brdHeaderList);
         model.addAttribute("pageResponse", pageResponse);
+
 
     }
 
@@ -50,17 +49,23 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String registerSave(Model model, BrdLineSaveRequest brdLineSaveRequest,@RequestParam("formFile")    MultipartFile[] uploadFile){
+    public String registerSave(Model model, BrdLineSaveRequest brdLineSaveRequest,@RequestParam(value = "formFile", required = false)   MultipartFile[] uploadFile){
 
+        log.info("++++++++++++uploadfile"+uploadFile.length);
 
-        BrdFileSaveRequest fileSaveRequest = new BrdFileSaveRequest();
-        fileSaveRequest.setUploadFile(uploadFile);
-        fileSaveRequest.setBrdLineSeq(brdLineSaveRequest.getBrdLineSeq());
+        if(uploadFile != null && uploadFile.length > 0){
 
-        Long brdLineSeq = brdService.LineSave(brdLineSaveRequest);
-        fileSaveRequest.setBrdLineSeq(brdLineSeq);
+            BrdFileSaveRequest fileSaveRequest = new BrdFileSaveRequest();
+            fileSaveRequest.setUploadFile(uploadFile);
+            fileSaveRequest.setBrdLineSeq(brdLineSaveRequest.getBrdLineSeq());
 
-        brdService.FileSave(fileSaveRequest);
+            Long brdLineSeq = brdService.LineSave(brdLineSaveRequest);
+            fileSaveRequest.setBrdLineSeq(brdLineSeq);
+
+            brdService.FileSave(fileSaveRequest);
+        }else {
+            brdService.LineSave(brdLineSaveRequest);
+        }
 
 
 
@@ -68,8 +73,9 @@ public class MainController {
 
     }
     @GetMapping("/read")
-    public void read(Model model){
-
+    public void read(Model model, BrdPageRequest brdPageRequest){
+        BrdLineInfoResponse brdLineInfoResponse = brdService.readLine(brdPageRequest.getBrdLineSeq());
+        model.addAttribute("lineResponse",brdLineInfoResponse);
     }
     @GetMapping("/lte3")
     public void lte(Model model){

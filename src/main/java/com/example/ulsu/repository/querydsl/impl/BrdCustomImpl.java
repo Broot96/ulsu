@@ -33,20 +33,20 @@ public class BrdCustomImpl extends QuerydslRepositorySupport implements BrdCusto
             for(String type : types){
 
                 switch (type){
-                    case "ttl":
+                    case "t":
                     booleanBuilder.or(brdLine.brdTtl.contains(keyword));
                         break;
-                    case "cn":
+                    case "c":
                     booleanBuilder.or(brdLine.cn.contains(keyword));
                         break;
-                    case "wrtTeam":
+                    case "w":
                     booleanBuilder.or(brdLine.wrtTeam.contains(keyword));
                         break;
                 }
             }
-            query.where(brdLine.brdLineSeq.gt(0L));
-
+            query.where(booleanBuilder);
         }
+        query.where(brdLine.brdLineSeq.gt(0L));
         this.getQuerydsl().applyPagination(pageable, query);
 
         List<BrdLine> list = query.fetch();

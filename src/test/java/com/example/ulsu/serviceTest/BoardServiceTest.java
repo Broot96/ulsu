@@ -52,12 +52,12 @@ public class BoardServiceTest {
     public void testList(){
         BrdPageRequest brdPageRequest = BrdPageRequest.builder()
                 .type("tcw")
-                .keyword("1")
+                .keyword("asdlfdnsdf")
                 .page(1)
                 .size(10)
                 .build();
 
         BrdPageResponse<BrdLineInfoResponse> responseDTO = brdService.list(brdPageRequest);
-        log.info(responseDTO);
+       log.info(responseDTO.getPageResponseList());
     }
 }

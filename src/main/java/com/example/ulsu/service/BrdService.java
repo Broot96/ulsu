@@ -8,15 +8,14 @@ import com.example.ulsu.makeroom.requestDto.BrdPageRequest;
 import com.example.ulsu.makeroom.responseDto.BrdHeaderInfoResponse;
 import com.example.ulsu.makeroom.responseDto.BrdLineInfoResponse;
 import com.example.ulsu.makeroom.responseDto.BrdPageResponse;
-import org.springframework.validation.annotation.Validated;
+
 
 import java.util.List;
 
-@Validated
 public interface BrdService {
 
     List<BrdHeaderInfoResponse> getHeaderList();
-    void FileSave(@Validated BrdFileSaveRequest brdFileSaveRequest);
+    void FileSave(BrdFileSaveRequest brdFileSaveRequest);
     Long LineSave(BrdLineSaveRequest brdLineSaveRequest);
     List<BrdLine> selectLineAll(BrdPageRequest brdPageRequest);
 

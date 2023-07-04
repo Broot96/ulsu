@@ -1,9 +1,6 @@
 package com.example.ulsu.makeroom.requestDto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -12,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrdPageRequest {
@@ -30,6 +27,7 @@ public class BrdPageRequest {
     private String link;
 
     private Long brdHeaderSeq;
+    private Long brdLineSeq;
 
     public String[] getTypes(){
         if(type == null || type.isEmpty()){
@@ -62,5 +60,7 @@ public class BrdPageRequest {
         }
         return link;
     }
+
+    public void changePage(int page) {this.page = page;}
 
 }

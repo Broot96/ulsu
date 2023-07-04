@@ -36,7 +36,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a th:href="@{/board/main}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -169,7 +169,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a th:href="@{/board/main}" class="brand-link">
       <img src="/assets/img/뎁스아이콘.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">뎁수 좋다 얼쑤</span>
     </a>
@@ -212,7 +212,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a th:href="@{/board/main}">Home</a></li>
               <li class="breadcrumb-item active">뎁수 좋다 얼쑤</li>
             </ol>
           </div><!-- /.col -->
@@ -228,14 +228,14 @@
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills" style="display: flex; justify-content: space-between; width: 100%;">
-                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto active" href="#tjr1" data-toggle="tab" style="text-align: center">[[${headerList[0].brdHeaderTtl}]]</a></li>
-                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto" href="#tjr2" data-toggle="tab" style="text-align: center">[[${headerList[1].brdHeaderTtl}]]</a></li>
-                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto" href="#tjr3" data-toggle="tab" style="text-align: center">[[${headerList[2].brdHeaderTtl}]]</a></li>
+                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto active" href="#brd1" data-toggle="tab" style="text-align: center">[[${headerList[0].brdHeaderTtl}]]</a></li>
+                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto" href="#brd2" data-toggle="tab" style="text-align: center">[[${headerList[1].brdHeaderTtl}]]</a></li>
+                <li class="nav-item w-auto" style="flex: 1"><a class="nav-link w-auto" href="#brd3" data-toggle="tab" style="text-align: center">[[${headerList[2].brdHeaderTtl}]]</a></li>
               </ul>
             </div>
             <div class="card-body">
               <div class="tab-content">
-                <div class="tab-pane active" id="tjr1">
+                <div class="tab-pane active" id="brd1">
                   <section class="content">
                     <div class="container-fluid">
                       <div class="row">
@@ -257,15 +257,26 @@
                                 </form>
                               </div>
                               <div>
-                                <form action="">
+                                <form th:action="@{/board/main}" method="get">
+                                  <div class="col">
+                                  <input type="hidden" name="size" th:value="${brdPageRequest.size}">
                                   <div class="input-group" style="display: inline-flex; align-items: center; margin-top: 10px; margin-bottom: 20px">
+                                    <div class="input-group-append">
+                                      <select class="form-select" name="type">
+                                        <option value="tcw" th:selected="${brdPageRequest.type == 'tcw'}">전체</option>
+                                        <option value="t" th:selected="${brdPageRequest.type == 't'}">제목</option>
+                                        <option value="c" th:selected="${brdPageRequest.type == 'c'}">내용</option>
+                                        <option value="w" th:selected="${brdPageRequest.type == 'w'}">작성팀</option>
+                                      </select>
+                                    </div>
                                     <label>검색창 : </label>
-                                    <input type="search" class="form-control form-control-lg" placeholder="검색어를 입력해주세요" style="margin-left: 10px">
+                                    <input type="text" name="keyword" class="form-control form-control-lg" placeholder="검색어를 입력해주세요" style="margin-left: 10px">
                                     <div class="input-group-append">
                                       <button type="submit" class="btn btn-lg btn-default">
                                         <i class="fa fa-search"></i>
                                       </button>
                                     </div>
+                                  </div>
                                   </div>
                                 </form>
                               </div>
@@ -279,25 +290,31 @@
                                   <th>조회수</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody th:with="link = ${brdPageRequest.getLink()}">
                                 <tr th:each="lineDto:${pageResponse.pageResponseList}">
                                   <td>[[${lineDto.brdLineSeq}]]</td>
-                                  <td>[[${lineDto.brdTtl}]]</td>
+                                  <td><a th:href="|@{/board/read(brdLineSeq =${lineDto.brdLineSeq})}&${link}|" >[[${lineDto.brdTtl}]]</a></td>
                                   <td>[[${lineDto.wrtTeam}]]</td>
-                                  <td>[[${lineDto.regDate}]]</td>
+                                  <td>[[${#temporals.format(lineDto.regDate, 'yyyy-MM-dd')}]]</td>
                                   <td>[[${lineDto.intqCnt}]]</td>
                                 </tr>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                  <th>Rendering engine</th>
-                                  <th>Browser</th>
-                                  <th>Platform(s)</th>
-                                  <th>Engine version</th>
-                                  <th>CSS grade</th>
-                                </tr>
-                                </tfoot>
                               </table>
+                              <div class="float-right">
+                                <ul class="pagination flex-wrap">
+                                  <li class="page-item" th:if="${pageResponse.prev}">
+                                    <a class="page-link" th:data-num="${pageResponse.start -1}">Prev</a>
+                                  </li>
+                                  <th:block th:each="i: ${#numbers.sequence(pageResponse.start, pageResponse.end)}">
+                                    <li th:class="${pageResponse.page == i}? 'page-item active' : 'page-item'">
+                                      <a class="page-link" th:href="@{/board/main(page=${i})}">[[${i}]]</a>
+                                    </li>
+                                  </th:block>
+                                  <li class="page-item" th:if="${pageResponse.next}">
+                                    <a class="page-link" th:data-num="${pageResponse.end +1}">Next</a>
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="row mb-3" style="margin-right: 15px">
@@ -316,11 +333,11 @@
                   </section>
                 </div>
 
-                <div class="tab-pane" id="tjr2">
+                <div class="tab-pane" id="brd2">
 
                 </div>
 
-                <div class="tab-pane" id="tjr3">
+                <div class="tab-pane" id="brd3">
 
                 </div>
 
