@@ -16,27 +16,34 @@ public class BrdLineSaveRequest {
     @Schema(description = "게시물 seq")
     private Long brdLineSeq;
 
-    //@NotNull(message = "게시판 시퀀스가 입력되지 않았습니다.")
     @Schema(description = "게시판 seq")
     private Long brdHeaderSeq;
 
-    //@NotBlank(message = "게시물 제목이 입력되지 않았습니다.")
     @Schema(description = "게시물 제목")
-    private String ttl;
+    private String brdTtl;
 
-    @Schema(description = "작성 팀")
+    @Schema(description = "작성자 그룹")
     private String wrtTeam;
 
-    @Schema(description = "작성 자")
+    @Schema(description = "작성자 이름")
     private String wrtName;
 
-    @Schema(description = "게시글 비밀번호")
-    private String pwd;
-
-    @Schema(description = "게시글 공지여부")
-    private String aYn;
-
-    //@NotBlank(message = "게시물 내용이 입력되지 않았습니다.")
     @Schema(description = "게시물 내용")
     private String cn;
+
+    @Schema(description = "조회수")
+    private int intqCnt;
+
+    @Schema(description = "게시물 비밀번호")
+    private String pwd;
+
+    @Schema(description = "게시물 삭제여부")
+    private String delYn;
+
+    @Schema(description = "게시물 공지여부")
+    private String aYn;
+
+    public BrdLineSaveRequest() {
+
+    }
 }

@@ -19,9 +19,9 @@ public class BrdLine extends AuditingFields{
     private Long brdLineSeq;                                //게시물 번호
     @Column(name = "BRD_HEADER_SEQ", nullable = false)
     private Long brdHeaderSeq;                              //게시판 번호
-    @Column(name = "BRD_TITLE", nullable = false)
+    @Column(name = "BRD_TITLE", nullable = true)
     private String brdTtl;                                  //게시글 제목
-    @Column(name = "WRT_TEAM", nullable = false)
+    @Column(name = "WRT_TEAM", nullable = true)
     private String wrtTeam;                                 //작성자 그룹
     @Column(name = "WRT_NAME", nullable = true)
     private String wrtName;                                 //작성자 이름
@@ -29,7 +29,7 @@ public class BrdLine extends AuditingFields{
     private String cn;                                      //게시물 내용
     @Column(name = "INTQ_CNT", nullable = true)
     private int intqCnt;                                   //조회수
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "PASSWORD", nullable = true)
     private String pwd;                                     //게시물 비밀번호
     @Column(name = "DEL_YN", nullable = true)
     private String delYn;                                   //게시물 삭제여부

@@ -37,7 +37,7 @@ public class BoardRepositoryTests {
 
         BrdLine brdLine = new BrdLine();
         brdLine.changeBrdHeaderSeq(2L);
-        brdLine.changeBrdTtl("공부중입니다....3");
+        brdLine.changeBrdTtl("공부중입니다....4");
         brdLine.changeWrtTeam("얼수팀");
         brdLine.changeWrtName("권석근");
         brdLine.changeCn("spring boot와 jpa react공부를 해봅시다");

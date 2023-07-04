@@ -7,13 +7,18 @@ import com.example.ulsu.makeroom.requestDto.BrdFileSaveRequest;
 import com.example.ulsu.makeroom.requestDto.BrdLineSaveRequest;
 import com.example.ulsu.makeroom.requestDto.BrdPageRequest;
 import com.example.ulsu.makeroom.responseDto.BrdHeaderInfoResponse;
+import com.example.ulsu.makeroom.responseDto.BrdLineInfoResponse;
+import com.example.ulsu.makeroom.responseDto.BrdPageResponse;
 import com.example.ulsu.repository.BrdFileRepository;
 import com.example.ulsu.repository.BrdHeaderRepository;
 import com.example.ulsu.repository.BrdLineRepository;
 import com.example.ulsu.service.BrdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +41,8 @@ public class BrdServiceImpl implements BrdService {
     private final BrdHeaderInfoResponse.BrdHeaderInfoDtoMapper brdHeaderInfoDtoMapper;
     private final BrdLineRepository brdLineRepository;
     private final BrdFileRepository brdFileRepository;
+    private final BrdLineInfoResponse.BrdLineInfoMapper brdLineInfoMapper;
+
 
     @Value("${upload.folder}")
     private String uploadFolder;
@@ -98,7 +107,7 @@ public class BrdServiceImpl implements BrdService {
     public Long LineSave(BrdLineSaveRequest brdLineSaveRequest) {
         BrdLine brdLine = new BrdLine();
         brdLine.changeBrdHeaderSeq(1L);
-        brdLine.changeBrdTtl(brdLineSaveRequest.getTtl());
+        brdLine.changeBrdTtl(brdLineSaveRequest.getBrdTtl());
         brdLine.changeWrtName(brdLineSaveRequest.getWrtName());
         brdLine.changePwd(brdLineSaveRequest.getPwd());
         brdLine.changeAyn("on".equals(brdLineSaveRequest.getAYn()) ? "Y" : "N");
@@ -118,5 +127,59 @@ public class BrdServiceImpl implements BrdService {
 
 
         return null;
+    }
+
+    @Override
+    public BrdLineInfoResponse readLine(Long brdLineSeq) {
+
+        Optional<BrdLine> result = brdLineRepository.findById(brdLineSeq);
+        BrdLine brdLine = result.orElseThrow();
+        BrdLineInfoResponse brdLineInfoResponse = brdLineInfoMapper.apply(brdLine);
+
+        return brdLineInfoResponse;
+    }
+
+    @Override
+    public void modify(BrdLineSaveRequest brdLineSaveRequest) {
+
+        Optional<BrdLine> result = brdLineRepository.findById(brdLineSaveRequest.getBrdLineSeq());
+        BrdLine brdLine = result.orElseThrow();
+
+        brdLine.changeBrdTtl(brdLineSaveRequest.getBrdTtl());
+        brdLine.changeWrtName(brdLineSaveRequest.getWrtName());
+        brdLine.changePwd(brdLineSaveRequest.getPwd());
+        brdLine.changeAyn("on".equals(brdLineSaveRequest.getAYn()) ? "Y" : "N");
+        brdLine.changeCn(brdLineSaveRequest.getCn());
+        brdLine.changeWrtTeam(brdLineSaveRequest.getWrtTeam());
+        brdLineRepository.save(brdLine);
+
+    }
+
+    @Override
+    public void remove(Long brdLineSeq) {
+
+        Optional<BrdLine> result = brdLineRepository.findById(brdLineSeq);
+        BrdLine brdLine = result.orElseThrow();
+        brdLine.changeDelYn("Y");
+        brdLineRepository.save(brdLine);
+    }
+
+    @Override
+    public BrdPageResponse<BrdLineInfoResponse> list(BrdPageRequest brdPageRequest) {
+
+        String[] types = brdPageRequest.getTypes();
+        String keyword = brdPageRequest.getKeyword();
+        Pageable pageable = brdPageRequest.getPageable("brdLineSeq");
+
+        Page<BrdLine> result = brdLineRepository.searchAll(types, keyword, pageable);
+
+        List<BrdLineInfoResponse> pageResponseList = result.getContent().stream()
+                .map(brdLine -> brdLineInfoMapper.apply(brdLine)).collect(Collectors.toList());
+
+        return BrdPageResponse.<BrdLineInfoResponse>withAll()
+                .brdPageRequest(brdPageRequest)
+                .pageResponseList(pageResponseList)
+                .total((int)result.getTotalElements())
+                .build();
     }
 }

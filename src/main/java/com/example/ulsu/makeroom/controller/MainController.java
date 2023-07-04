@@ -2,7 +2,10 @@ package com.example.ulsu.makeroom.controller;
 
 import com.example.ulsu.makeroom.requestDto.BrdFileSaveRequest;
 import com.example.ulsu.makeroom.requestDto.BrdLineSaveRequest;
+import com.example.ulsu.makeroom.requestDto.BrdPageRequest;
 import com.example.ulsu.makeroom.responseDto.BrdHeaderInfoResponse;
+import com.example.ulsu.makeroom.responseDto.BrdLineInfoResponse;
+import com.example.ulsu.makeroom.responseDto.BrdPageResponse;
 import com.example.ulsu.service.BrdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,12 +32,13 @@ public class MainController {
     private final BrdService brdService;
 
     @GetMapping("/main")
-    public void main(Model model){
+    public void main(Model model, BrdPageRequest brdPageRequest){
 
         List<BrdHeaderInfoResponse> brdHeaderList = brdService.getHeaderList();
-
+        BrdPageResponse<BrdLineInfoResponse> pageResponse = brdService.list(brdPageRequest);
 
         model.addAttribute("headerList", brdHeaderList);
+        model.addAttribute("pageResponse", pageResponse);
 
     }
 
