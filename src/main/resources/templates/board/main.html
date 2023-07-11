@@ -246,18 +246,15 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                              <div>
-                                <form th:method="get" th:action="@{/orders}">
-                                  <label for="startDate">등록일  :   </label>
-                                  <input type="date" class="form-control-sm" style="width: 250px; margin-left: 10px" id="startDate" name="startDate" required th:value="${startDate != null ? startDate : ''}">
-                                  <label for="endDate">~</label>
-                                  <input type="date" class="form-control-sm" style="width: 250px" id="endDate" name="endDate" required th:value="${endDate != null ? endDate : ''}">
-                                  <button type="submit" class="btn btn-outline-secondary">조회</button>
+                              <form th:action="@{/board/main}" method="get">
+                                <div>
+                                  <label >등록일  :   </label>
+                                  <input type="date" class="form-control-sm" style="width: 250px; margin-left: 10px" id="startDate" name="startDate"  th:value="${startDate != null ? startDate : ''}">
+                                  <label >~</label>
+                                  <input type="date" class="form-control-sm" style="width: 250px" id="endDate" name="endDate"  th:value="${endDate != null ? endDate : ''}">
                                   <a th:href="@{/orders}" class="btn btn-outline-secondary">초기화</a>
-                                </form>
-                              </div>
+                                </div>
                               <div>
-                                <form th:action="@{/board/main}" method="get">
                                   <div class="col">
                                   <input type="hidden" name="size" th:value="${brdPageRequest.size}">
                                   <div class="input-group" style="display: inline-flex; align-items: center; margin-top: 10px; margin-bottom: 20px">
@@ -278,8 +275,8 @@
                                     </div>
                                   </div>
                                   </div>
+                                </div>
                                 </form>
-                              </div>
                               <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
@@ -400,8 +397,8 @@
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="//dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="//dist/js/pages/dashboard.js"></script>
+<!--<script src="//dist/js/demo.js"></script>
+&lt;!&ndash; AdminLTE dashboard demo (This is only for demo purposes) &ndash;&gt;
+<script src="//dist/js/pages/dashboard.js"></script>-->
 </body>
 </html>

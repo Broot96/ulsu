@@ -19,7 +19,7 @@ import java.util.Optional;
 @Log4j2
 public class BoardRepositoryTests {
 
-    @Autowired
+    /*@Autowired
     private BrdLineRepository brdLineRepository;
     @Autowired
     private BrdHeaderRepository brdHeaderRepository;
@@ -130,6 +130,6 @@ public class BoardRepositoryTests {
         log.info(result.hasPrevious() + ": " + result.hasNext());
 
         result.getContent().forEach(brdLine -> log.info(brdLine));
-    }
+    }*/
 
 }

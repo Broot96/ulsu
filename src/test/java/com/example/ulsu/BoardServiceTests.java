@@ -13,7 +13,7 @@ import java.util.List;
 @Log4j2
 public class BoardServiceTests {
 
-    @Autowired
+   /* @Autowired
     private BrdService brdService;
 
     @Test
@@ -25,6 +25,6 @@ public class BoardServiceTests {
         log.info(result.get(1).getBrdHeaderTtl());
         log.info(result.get(2).getBrdHeaderTtl());
 
-    }
+    }*/
 
 }

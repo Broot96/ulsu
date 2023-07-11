@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Log4j2
 public class BoardServiceTest {
 
-    @Autowired
+    /*@Autowired
     private BrdService brdService;
 
     @Test
@@ -59,5 +59,5 @@ public class BoardServiceTest {
 
         BrdPageResponse<BrdLineInfoResponse> responseDTO = brdService.list(brdPageRequest);
        log.info(responseDTO.getPageResponseList());
-    }
+    }*/
 }

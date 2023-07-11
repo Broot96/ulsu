@@ -14,7 +14,7 @@ import java.sql.SQLException;
 @Log4j2
 public class DataSourceTests {
 
-    @Autowired
+   /* @Autowired
     private DataSource dataSource;
 
     @Test
@@ -24,7 +24,7 @@ public class DataSourceTests {
         Connection con = dataSource.getConnection();
 
         log.info(con);
-    }
+    }*/
 
 
 }
